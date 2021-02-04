@@ -70,19 +70,11 @@ public class TestSite {
 			//"TLS_KRB5_WITH_DES_CBC_MD5"
 
 			for (String cypherSuite : cypherSuitesToTest) {
-				System.out.println("    Cipher suite = "+cypherSuite);
-				sslsocket = (SSLSocket) sslsocketfactory.createSocket();
-				sslsocket.setEnabledCipherSuites(new String[] {cypherSuite});
-				sslsocket.connect(new InetSocketAddress(host,port));
-
-				ss = sslsocket.getSession();
-
-				System.out.println("    Working = "+!ss.getCipherSuite().contains("NULL"));
-				System.out.println("    Protocol = " + ss.getProtocol());
-				System.out.println();
+				isCypherSuiteWorking(host, port, sslsocketfactory, cypherSuite);
 			}
 
-			System.out.println("--------------------------------------------------");
+			System.out.println("--------" +
+					"------------------------------------------");
 
 
 		} catch (IOException e) {
@@ -93,5 +85,20 @@ public class TestSite {
 
 
 
+	}
+
+	private static void isCypherSuiteWorking(String host, int port, SSLSocketFactory sslsocketfactory, String cypherSuite) throws IOException {
+		SSLSocket sslsocket;
+		SSLSession ss;
+		System.out.println("    Cipher suite = "+ cypherSuite);
+		sslsocket = (SSLSocket) sslsocketfactory.createSocket();
+		sslsocket.setEnabledCipherSuites(new String[] {cypherSuite});
+		sslsocket.connect(new InetSocketAddress(host, port));
+
+		ss = sslsocket.getSession();
+
+		System.out.println("    Working = "+!ss.getCipherSuite().contains("NULL"));
+		System.out.println("    Protocol = " + ss.getProtocol());
+		System.out.println();
 	}
 }

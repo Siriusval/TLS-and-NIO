@@ -1,5 +1,18 @@
 # Squelette du TP
 
+## Generate key with
+```sh
+keytool -genkey -alias maclef -keyalg RSA -storetype PKCS12 -keysize 2048 -keypass 123456 -keystore serveurstore.keys -storepass 123456
+```
+
+## Connect to SSL server with
+```sh
+openssl s_client -connect <your-ip>:9999
+```
+Exemples :
+- openssl s_client -connect localhost:9999
+- openssl s_client -connect 192.168.1.31:9999
+
 ## Utilisation
 
 Pour utiliser ce tp vous devez :
