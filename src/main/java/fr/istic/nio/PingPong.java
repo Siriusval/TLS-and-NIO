@@ -36,6 +36,8 @@ public class PingPong {
 			ByteBuffer buffer = ByteBuffer.allocate(BUFFER_SIZE);
 			int number = 0;
 			System.out.println("Server ready.");
+			System.out.println("Connect with nc 192.168.1.31 9999");
+			System.out.println("And send \"PING <number>\"");
 
 			// On boucle :
 			while (true) {

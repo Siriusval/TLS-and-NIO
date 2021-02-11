@@ -35,7 +35,8 @@ public class Client {
 		// Creation de la socket
 		SSLSocketFactory sslsocketfactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
 		SSLSocket sslsocket = (SSLSocket) sslsocketfactory.createSocket(HOST,PORT);
-
+		System.out.println("Waiting for connexion.");
+		System.out.println("Please start Serveur.java.");
 		// Creation des printwriter et buffered reader puis :
 		// lire PING
 		InputStream in = sslsocket.getInputStream();
@@ -46,11 +47,12 @@ public class Client {
 
 		//Init output
 		OutputStream out = sslsocket.getOutputStream();
+
 		PrintWriter printWriter = new PrintWriter(out);
 		printWriter.println("PING");
 		printWriter.flush();
-
-		System.out.println(bufferedReader.readLine());
+		System.out.println("Connected. Message sent : PING");
+		System.out.println("Message received : "+bufferedReader.readLine());
 
 		sslsocket.close();
 	}
