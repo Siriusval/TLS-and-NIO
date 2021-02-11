@@ -33,6 +33,7 @@ public class Serveur {
 		//Force cypher suite (choose)
 		String choosenCypherSuite = "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256";
 		System.out.println("Want to force "+choosenCypherSuite+" cypher suite [y/n]?");
+		System.out.println("(Might not work if suite is not secure enough.)");
 		Scanner sc = new Scanner(System.in);
 		String choice = sc.nextLine();
 		if(choice.equals("y")){
@@ -41,7 +42,9 @@ public class Serveur {
 		}
 
 		//Wait for connexion
-		System.out.println("Please connect w/ nc 192.168.1.31 9999 and send PING");
+		System.out.println("Classic\t:\tPlease connect w/ nc 192.168.1.31 9999 and send PING");
+		System.out.println("TLS\t:\tPlease connect w/ openssl s_client -connect 192.168.1.31:9999 and send PING");
+
 		readPingSendPong(serverTLS);
 		serverTLS.close();
 	}
